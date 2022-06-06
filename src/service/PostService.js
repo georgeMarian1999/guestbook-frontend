@@ -4,9 +4,13 @@ class PostService {
     addPost(image, title, text, onUploadProgress) {
         let formData = new FormData();
 
-        formData.append("image", image);
+        console.log(image);
 
-        return http.post("/post", formData, {
+        formData.append("image", image);
+        formData.append("title", title);
+        formData.append("text", text);
+
+        return http.post("/post/", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             },
@@ -16,6 +20,12 @@ class PostService {
 
     getPosts() {
         return http.get("/post/");
+    }
+    getPost(rowKey) {
+      return http.get("/post/" + rowKey);
+    }
+    deletePost(rowKey) {
+        return http.delete("/post/" + rowKey);
     }
 }
 
